@@ -1,0 +1,12 @@
+{
+  "name": "rholter.greenriverdev.com/328/mydate",
+  "authors": [
+    {
+      "name": "Renee Holter",
+      "email": "holter.renee@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
