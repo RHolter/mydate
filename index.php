@@ -18,11 +18,29 @@ $f3->route('GET /', function() {
     echo $view-> render('views/home.html');
 }
 );
+
+// route to personal
 $f3->route('GET /personal', function (){
-    //echo "<h1>User Profile Page</h1>"
+    //echo "<h1Personal</h1>"
     $view = new Template();
     echo $view-> render('views/personal.html');
 });
+
+// route to profile
+$f3->route('GET /profile', function (){
+    //echo "<h1>Profile</h1>"
+    $view = new Template();
+    echo $view-> render('views/profile.html');
+});
+
+// route to interests
+$f3->route('GET /interests', function (){
+    //echo "<h1>Profile</h1>"
+    $view = new Template();
+    echo $view-> render('views/interests.html');
+});
+
+//route to summary
 
 //run fat free
 $f3->run();
