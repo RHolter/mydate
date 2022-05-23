@@ -22,10 +22,7 @@ $f3->route('GET /', function() {
 // route to personal
 $f3->route('GET /personal', function (){
     //echo "<h1Personal</h1>"
-    $_SESSION['fName'] = $_POST['fName'];
-    $_SESSION['lName'] = $_POST['lName'];
-    $_SESSION['gender'] = $_POST['gender'];
-    $_SESSION['age'] = $_POST['age'];
+
 
     $view = new Template();
     echo $view-> render('views/personal.html');
@@ -35,7 +32,7 @@ $f3->route('GET /personal', function (){
 $f3->route('GET /profile', function (){
     //echo "<h1>Profile</h1>"
 
-    $_SESSION[] = $_POST[];
+    $_SESSION['email'] = $_POST['email'];
     $view = new Template();
     echo $view-> render('views/profile.html');
 });
@@ -48,10 +45,10 @@ $f3->route('GET /interests', function (){
 });
 
 //route to summary
-$f3->route('GET /profilesummary', function (){
+$f3->route('GET /summary', function (){
     //echo "<h1>Profile</h1>"
     $view = new Template();
-    echo $view-> render('views/profilesummary.html');
+    echo $view-> render('views/summary.html');
 });
 
 //run fat free
