@@ -19,17 +19,18 @@ $f3->route('GET /', function() {
 }
 );
 
-// route to personal
-$f3->route('GET /personal', function (){
-    //echo "<h1Personal</h1>"
+$f3->route('GET /personal', function() {
+//    var_dump($_POST);
 
+    $_SESSION['fName'] = $_POST['fName'];
+    $_SESSION['age'] = $_POST['age'];
 
     $view = new Template();
-    echo $view-> render('views/personal.html');
+    echo $view->render('views/personal.html');
 });
 
 // route to profile
-$f3->route('GET /profile', function (){
+$f3->route('GET|POST /profile', function (){
     //echo "<h1>Profile</h1>"
 
     $_SESSION['email'] = $_POST['email'];
@@ -38,14 +39,14 @@ $f3->route('GET /profile', function (){
 });
 
 // route to interests
-$f3->route('GET /interests', function (){
+$f3->route('GET|POST /interests', function (){
     //echo "<h1>Profile</h1>"
     $view = new Template();
     echo $view-> render('views/interests.html');
 });
 
 //route to summary
-$f3->route('GET /summary', function (){
+$f3->route('POST|POST /summary', function (){
     //echo "<h1>Profile</h1>"
     $view = new Template();
     echo $view-> render('views/summary.html');
