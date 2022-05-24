@@ -7,6 +7,9 @@ error_reporting(E_ALL);
 //require the autoload file
 require_once("vendor/autoload.php");
 
+//Start a session
+session_start();
+
 //create an instance of the base class
 // :: invokes a static method
 
@@ -22,7 +25,7 @@ $f3->route('GET /', function() {
 $f3->route('GET /personal', function() {
 //    var_dump($_POST);
 
-    $_SESSION['fName'] = $_POST['fName'];
+    $_SESSION['fname'] = $_POST['fName'];
     $_SESSION['age'] = $_POST['age'];
 
     $view = new Template();
@@ -30,7 +33,7 @@ $f3->route('GET /personal', function() {
 });
 
 // route to profile
-$f3->route('GET|POST /profile', function (){
+$f3->route('GET /profile', function (){
     //echo "<h1>Profile</h1>"
 
     $_SESSION['email'] = $_POST['email'];
@@ -39,14 +42,14 @@ $f3->route('GET|POST /profile', function (){
 });
 
 // route to interests
-$f3->route('GET|POST /interests', function (){
+$f3->route('GET /interests', function (){
     //echo "<h1>Profile</h1>"
     $view = new Template();
     echo $view-> render('views/interests.html');
 });
 
 //route to summary
-$f3->route('POST|POST /summary', function (){
+$f3->route('GET /summary', function (){
     //echo "<h1>Profile</h1>"
     $view = new Template();
     echo $view-> render('views/summary.html');
