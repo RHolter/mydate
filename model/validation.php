@@ -1,55 +1,80 @@
 <?php
 
+class Validation {
+    // ----- validations -----
 
-// validate name
-function validName($name)
-{
-    return strlen(trim($name)) >= 2;
-}
 
-// validate age
-function validAge($age)
-{
-    if ($age == "") {
-        return false;
-    } else if (!is_numeric($age)) {
-        return false;
-    } else if ($age >= 18 && $age <= 118) {
-        return true;
-    }
-}
+    static function validName($str) {
+        for ($i=0;$i<strlen($str);$i++) {
+            // If any character is not alphabetic
+            if (!ctype_alpha($str[$i])) {
+                return FALSE;
+            }
+        }
 
-// validate phone number
-function validPhone($phone)
-{
-    return strlen($phone) == 10;
-}
-
-function validGender($gender)
-{
-    return in_array($gender, getGender());
-}
-
-// validate email
-function validEmail($email)
-{
-    if(filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
-        return true;
+        // Checking if the name is at least one letter
+        return strlen(trim($str))>0;
     }
 
-    else
-    {
-        return false;
+    static function validAge($age) {
+        // Checking if age is between 18 and 118
+        return ($age>=18 && $age<=118);
     }
-}
-// validate outdoor activities
-function validOutdoor($outdoor)
-{
-    return in_array($outdoor, getOutdoorInterest());
-}
-// validate indoor activities
-function validIndoor($interestsIndoor)
-{
-    return in_array($interestsIndoor, getIndoorInterest());
+
+
+    static function validPhone($phone) {
+        for ($i=0;$i<strlen($phone);$i++) {
+            // Checking if any character is not a digit
+            if (!ctype_digit($phone[$i])) {
+                return FALSE;
+            }
+        }
+
+        // Ensuring that the phone number is either 7 or 10 numbers long
+        return (strlen(trim($phone))==10 || strlen(trim($phone))==7);
+    }
+
+
+    static function validEmail($email) {
+        // Ensuring the email has a '@' and '.'
+        return filter_var($email,FILTER_VALIDATE_EMAIL);
+    }
+
+
+    static function validOutdoor($outdoorInterests) {
+        // If no outdoor interests were selected
+        if (empty($outdoorInterests)) {
+            return TRUE;
+        }
+
+        // Loops through the user choices
+        foreach ($outdoorInterests as $outdoorInterest) {
+            // If the choice is not in the list of valid choices
+            if (!in_array($outdoorInterest, DataLayer::getOutdoorInterests())) {
+                return FALSE;
+            }
+        }
+
+        // Return true if no invalid values were found
+        return TRUE;
+    }
+
+
+    static function validIndoor($indoorInterests) {
+        // If no indoor interests were selected
+        if (empty($indoorInterests)) {
+            return TRUE;
+        }
+
+        // Loops through the user choices
+        foreach ($indoorInterests as $indoorInterest) {
+            // If the choice is not in the list of valid choices
+            if (!in_array($indoorInterest, DataLayer::getIndoorInterests())) {
+                return FALSE;
+            }
+        }
+
+        // Return true if no invalid values were found
+        return TRUE;
+    }
 }
