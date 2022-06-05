@@ -1,42 +1,55 @@
 <?php
 
-/* diner/model/validation.php
- * Validate user input from the diner app
- *
- */
-class Validation
+
+// validate name
+function validName($name)
 {
-    // Food must have at least 2 characters
-    static function validFood($food)
-    {
-        /*
-        if (strlen(trim($food)) >= 2) {
-            return true;
-        }
-        else {
-            return false;
-        }
-        */
+    return strlen(trim($name)) >= 2;
+}
 
-        return strlen(trim($food)) >= 2;
-    }
-
-    //Validate meal
-    static function validMeal($meal)
-    {
-        return in_array($meal, DataLayer::getMeals());
-    }
-
-    // validate condiments
-    static function validConds($userCondArray)
-    {
-        $validCondArray = DataLayer::getCondiments();
-
-        foreach($userCondArray as $userCond){
-            if(!in_array($userCond,$validCondArray)){
-                return false;
-            }
-        }
+// validate age
+function validAge($age)
+{
+    if ($age == "") {
+        return false;
+    } else if (!is_numeric($age)) {
+        return false;
+    } else if ($age >= 18 && $age <= 118) {
         return true;
     }
+}
+
+// validate phone number
+function validPhone($phone)
+{
+    return strlen($phone) == 10;
+}
+
+function validGender($gender)
+{
+    return in_array($gender, getGender());
+}
+
+// validate email
+function validEmail($email)
+{
+    if(filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
+}
+// validate outdoor activities
+function validOutdoor($outdoor)
+{
+    return in_array($outdoor, getOutdoorInterest());
+}
+// validate indoor activities
+function validIndoor($interestsIndoor)
+{
+    return in_array($interestsIndoor, getIndoorInterest());
 }
